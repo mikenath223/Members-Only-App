@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   patch '/logout', to: 'sessions#destroy'
 
+  resources :posts, only: %i[new create index]
+  
   root 'sessions#new'
 end
