@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[new create index]
   
-  root 'sessions#new'
+  root 'posts#index'
 end

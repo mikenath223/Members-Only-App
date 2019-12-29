@@ -22,4 +22,5 @@ module SessionsHelper
     cookies[:remember_token] = nil
     session[:user_id] = nil
   end
+  
 end

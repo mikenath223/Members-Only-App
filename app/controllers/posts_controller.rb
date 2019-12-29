@@ -1,9 +1,36 @@
 class PostsController < ApplicationController
-    def before_action
-        if 
-            
-        else
-            
-        end
+    before_action :logged_in_user?, only: %i[new, create, index]
+
+    def new
+      @post = Post.new
+    end
+
+    def create
+      current_user
+      params[:post][:user_id] = @current_user.id
+      @post = Post.new(post_params)
+      if @post.save
+        flash[:success] = "Post created successfully"
+        redirect_to root_path
+      else
+        render 'new'
+      end
+    end
+
+    def index
+      @posts = Post.all  
+    end
+
+    private
+
+    def logged_in_user?
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    def post_params
+      params.require(:post).permit(:body, :user_id)
     end
 end
