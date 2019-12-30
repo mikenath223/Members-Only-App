@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # resources :users, only: %i[new create edit update]
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  patch '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
 
   resources :posts, only: %i[new create index]
   

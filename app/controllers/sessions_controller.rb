@@ -5,12 +5,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
-      log_in @user
-      @current_user = @user
-
-      flash[:success] = "#{@current_user.name} signed in succcessfully"
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      log_in user
+      
+      flash[:success] = "#{user.name} signed in succcessfully"
       redirect_to root_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
@@ -18,8 +17,8 @@ class SessionsController < ApplicationController
     end
   end
 
-  def delete
-    log_out if logged_in?
+  def destroy
+    log_out
     flash[:success] = "Successfully logged out"
     redirect_to root_path
   end
