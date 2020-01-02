@@ -30,12 +30,10 @@ module SessionsHelper
   def log_out
     current_user.update_attribute(:remember_token,
                                   User.digest(User.new_token))
-    
-                                  session[:user_id] = nil
 
+    session[:user_id] = nil
     cookies.delete(:remember_token)
     cookies.delete(:user_id)
     self.current_user = nil
-    
   end
 end

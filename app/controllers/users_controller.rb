@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App! Now you can create a post"
+      flash[:success] = 'Welcome to the Sample App! Now you can create a post'
       redirect_to new_post_path
     else
       render :new
@@ -20,6 +20,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-      :password_confirmation)
+                                 :password_confirmation)
   end
 end
