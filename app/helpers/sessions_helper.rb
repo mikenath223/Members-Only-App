@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module SessionsHelper
   attr_writer :current_user
   def log_in(user)
     session[:user_id] = user.id
   end
-  
+
   def current_user
     user_id = session[:user_id]
     @current_user ||= User.find_by(id: user_id)
@@ -27,7 +29,7 @@ module SessionsHelper
 
   def log_out
     current_user.update_attribute(:remember_token,
-      User.digest(User.new_token))
+                                  User.digest(User.new_token))
     cookies.delete(:remember_token)
     self.current_user = nil
   end
