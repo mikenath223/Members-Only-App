@@ -11,10 +11,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :posts
 
-  def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-    BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
+  def self.digest(token)
+    Digest::SHA1.hexdigest(token.to_s)
   end
 
   def self.new_token
