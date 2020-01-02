@@ -20,7 +20,6 @@ class PostsController < ApplicationController
       @posts = Post.all
       @signed_in = current_user.present?
     end
-
     
     def logged_in_user?
       unless logged_in?
