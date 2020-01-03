@@ -1,0 +1,49 @@
+<div class="container-fluid">
+<h1 class="text-success"> Hush Hush Clubhouse</h1>
+<h3>
+    A member only secret clubhouse where members can write embarrassing posts about non-members. 
+</h3>
+
+<p>
+    In the clubhouse, members can see who the author of a post is but, outside, they can 
+    only see the story and keep wondering who wrote it. Everything is hush hush. To be part of the members you must sign up.
+</p>
+
+<% if current_user.present? %>
+<h3 class="text-warning">Logged in as: <%= @current_user.name %></h3>
+<hr>
+<p><%= link_to  "Create New Post", new_post_path %></p>
+<% end %>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Title</td>
+            <td>Body</td>
+            <% if current_user.present? %>
+              <td class="text-danger">Author</td>
+            <% end %>
+            <td colspan="3"></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @posts.each do |post| %>
+        <tr>
+            <td><%= post.title %></td>
+            <td><%= post.body %></td>
+            <% if current_user.present? %>
+              <td>
+                  <%= post.user.name%>
+              </td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<hr>
+<% if @signed_in %>
+<h3><%= link_to "Logout", logout_path, class: "btn btn-danger" %></h3>
+<% end %>
+</div>
