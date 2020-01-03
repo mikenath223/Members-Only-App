@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user
+    @post.user_id = current_user.id
     if @post.save
       flash[:success] = 'Post created successfully'
       redirect_to root_path
@@ -20,7 +20,6 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    @signed_in = current_user.present?
   end
 
   def logged_in_user?

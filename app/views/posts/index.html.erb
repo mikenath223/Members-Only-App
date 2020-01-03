@@ -20,7 +20,7 @@
         <tr>
             <td>Title</td>
             <td>Body</td>
-            <% if @signed_in %>
+            <% if current_user.present? %>
               <td class="text-danger">Author</td>
             <% end %>
             <td colspan="3"></td>
@@ -32,7 +32,7 @@
         <tr>
             <td><%= post.title %></td>
             <td><%= post.body %></td>
-            <% if @signed_in %>
+            <% if current_user.present? %>
               <td>
                   <%= post.user.name%>
               </td>

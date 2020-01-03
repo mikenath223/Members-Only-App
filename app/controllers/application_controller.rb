@@ -4,14 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  def log_in(user)
-    session[:user_id] = user.id
-  end
-
   def remember(user)
-    user.remember
+    user.update_attribute(:remember_token,
+                          Digest::SHA1.hexdigest(SecureRandom.urlsafe_base64))
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
+    current_user = user
   end
 
   def forget(user)
@@ -21,12 +19,9 @@ class ApplicationController < ActionController::Base
   end
 
   def log_out
-    current_user.update_attribute(:remember_token,
-                                  User.digest(User.new_token))
-
     session[:user_id] = nil
     cookies.delete(:remember_token)
     cookies.delete(:user_id)
-    self.current_user = nil
+    current_user = nil
   end
 end
