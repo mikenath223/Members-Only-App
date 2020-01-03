@@ -9,7 +9,7 @@
     only see the story and keep wondering who wrote it. Everything is hush hush. To be part of the members you must sign up.
 </p>
 
-<% if @signed_in %>
+<% if current_user.present? %>
 <h3 class="text-warning">Logged in as: <%= @current_user.name %></h3>
 <hr>
 <p><%= link_to  "Create New Post", new_post_path %></p>
