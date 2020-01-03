@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
                           Digest::SHA1.hexdigest(SecureRandom.urlsafe_base64))
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
-    current_user = user
   end
 
   def forget(user)
@@ -22,6 +21,5 @@ class ApplicationController < ActionController::Base
     session[:user_id] = nil
     cookies.delete(:remember_token)
     cookies.delete(:user_id)
-    current_user = nil
   end
 end
