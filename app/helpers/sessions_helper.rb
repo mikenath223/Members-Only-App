@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module SessionsHelper
-  attr_writer :current_user
-
   def current_user
     @current_user ||= User.find_by(id: cookies.signed[:user_id])
   end
