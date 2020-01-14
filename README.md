@@ -38,6 +38,8 @@ Rails 6.0.2
 
 Ruby 2.6.5
 
+Yarn 1.21.1
+
 # License
 
 This project is [MIT](lic.url) licensed.
